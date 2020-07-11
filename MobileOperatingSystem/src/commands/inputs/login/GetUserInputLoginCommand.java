@@ -26,14 +26,14 @@ public class GetUserInputLoginCommand implements Command {
 			printOut.println("Please enter your phone number");
 			printOut.println("Your input please: ");
 			printOut.flush();
-			String userName = buffReader.readLine();
+			String userPhone = buffReader.readLine();
 
 			printOut.println("Please enter your password");
 			printOut.println("Your input please: ");
 			printOut.flush();
 			String password = buffReader.readLine();
 
-			User user = new User(userName, password);
+			User user = new User(userPhone, password);
 			return new LoginUserActionCommand(connection, printOut, buffReader, user);
 		} catch (IOException e) {
 			e.printStackTrace();

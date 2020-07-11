@@ -9,7 +9,7 @@ VALUES ("admin1", "123456A"),
 INSERT INTO clients (first_name, last_name, phone, client_pass)
 VALUES ("Dimitar", "Petkov", "0898433559", "123456H"),
 ("Georgi", "Ivanov", "0895684879", "987654M"),
-("Ivan", "Todorov", "0888488246", "456789K"),
+("Ivan", "Todorov", "0896488246", "456789K"),
 ("Martin", "Petrov", "0895489829", "pass123");
 
 INSERT INTO contracts (operator_id, minutes, megabytes, sms, bill)

@@ -22,7 +22,7 @@ public class MainMenuCommand implements Command {
 	@Override
 	public Command execute(Command parent) {
 		try {
-			printOut.println("Main menu: 1.Login");
+			printOut.println("Main menu: 1.Login 2.Exit");
 			printOut.println("Your input please: ");
 			printOut.flush();
 			String userMenuAnswer = buffReader.readLine();
@@ -43,6 +43,9 @@ public class MainMenuCommand implements Command {
 		case "Login":
 		case "1":
 			return new LoginMenuCommand(connection, printOut, buffReader);
+		case "Exit":
+		case "2":
+			System.exit(1);
 		default:
 			throw new InputOptionException();
 		}

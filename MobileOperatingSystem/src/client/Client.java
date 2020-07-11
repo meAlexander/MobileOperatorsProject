@@ -3,6 +3,7 @@ package client;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Client {
@@ -15,13 +16,18 @@ public class Client {
 		PrintStream socketOut = new PrintStream(socket.getOutputStream());
 
 		while (true) {
-			String line = socketScanner.nextLine();
-			System.out.println(line);
+			try {
+				String line = socketScanner.nextLine();
+				System.out.println(line);
 
-			if (line.equals("Your input please: ")) {
-				String userInput = consoleScanner.nextLine();
-				socketOut.println(userInput);
-				socketOut.flush();
+				if (line.equals("Your input please: ")) {
+					String userInput = consoleScanner.nextLine();
+					socketOut.println(userInput);
+					socketOut.flush();
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("Bye");
+				System.exit(1);
 			}
 		}
 	}

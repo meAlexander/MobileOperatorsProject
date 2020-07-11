@@ -5,25 +5,29 @@ public class User {
 	private String password;
 	private String phone;
 	
-	public User(String user, String password, String phone) {
-		this.userName = user;
-		this.password = password;
+	public User(String phone, String password, String userName) {
 		this.phone = phone;
+		this.password = password;
+		this.userName = userName;
 	}
 	
-	public User(String user, String password) {
-		this(user, password, "NULL");
+	public User(String phone, String password) {
+		this(phone, password, "NULL");
+	}
+	
+	public User(String phone) {
+		this(phone, "NULL", "NULL");
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getPhone() {
+		return phone;
 	}
 	
 	public String getPassword() {
 		return password;
 	}
 	
-	public String getPhone() {
-		return phone;
+	public String getUserName() {
+		return userName;
 	}
 }

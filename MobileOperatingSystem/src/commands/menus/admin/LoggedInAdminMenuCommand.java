@@ -33,17 +33,19 @@ public class LoggedInAdminMenuCommand implements Command {
 			printOut.flush();
 
 			String adminMenuAnswer = buffReader.readLine();
-			return getNextCommand(adminMenuAnswer);
+			return getNextCommand(adminMenuAnswer, parent);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InputOptionException e) {
+			printOut.println(e.getMessage());
 			printOut.flush();
-			return new LoggedInAdminMenuCommand(connection, printOut, buffReader);
+			return parent;
+//			return new LoggedInAdminMenuCommand(connection, printOut, buffReader);
 		}
 		return null;
 	}
 
-	private Command getNextCommand(String adminMenuAnswer) throws InputOptionException {
+	private Command getNextCommand(String adminMenuAnswer, Command nextCommand) throws InputOptionException {
 		switch (adminMenuAnswer) {
 		case "Add services to client":
 		case "1":
@@ -53,7 +55,7 @@ public class LoggedInAdminMenuCommand implements Command {
 			return new AddNewClient(connection, printOut, buffReader);
 		case "Search client by phone number":
 		case "3":
-			return new SearchClientByPhone(connection, printOut, buffReader);
+			return new SearchClientByPhone(connection, printOut, buffReader, nextCommand);
 		case "View clients who have not paid yet":
 		case "4":
 			return new ViewDebtors(connection, printOut, buffReader);

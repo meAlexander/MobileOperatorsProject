@@ -36,28 +36,29 @@ public class LoggedInUserMenuCommand implements Command {
 			printOut.flush();
 
 			String loginUserAnswer = buffReader.readLine();
-			return getNextCommand(loginUserAnswer);
+			return getNextCommand(loginUserAnswer, parent);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InputOptionException e) {
 			printOut.println(e.getMessage());
 			printOut.flush();
-			return new LoggedInUserMenuCommand(connection, printOut, buffReader, user);
+			return parent;
+			//return new LoggedInUserMenuCommand(connection, printOut, buffReader, user);
 		}
 		return null;
 	}
 
-	private Command getNextCommand(String loginUserAnswer) throws InputOptionException {
+	private Command getNextCommand(String loginUserAnswer, Command nextCommand) throws InputOptionException {
 		switch (loginUserAnswer) {
 		case "View available active services":
 		case "1":
-			return new ViewAvailableActiveServices(connection, printOut, buffReader, user);
+			return new ViewAvailableServices(connection, printOut, nextCommand);
 		case "Check remaining minutes, megabytes, sms":
 		case "2":
-			return new CheckRamainingServices(connection, printOut, buffReader, user);
+			return new CheckRamainingServices(connection, printOut, user, nextCommand);
 		case "View monthly invoice issue date":
 		case "3":
-			return new ViewInvoiceIssueDate(connection, printOut, buffReader, user);
+			return new ViewInvoiceIssueDate(connection, printOut, user, nextCommand);
 		case "Main menu":
 		case "4":
 			return new MainMenuCommand(connection, printOut, buffReader);

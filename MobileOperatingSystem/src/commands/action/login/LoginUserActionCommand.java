@@ -44,8 +44,11 @@ public class LoginUserActionCommand implements Command {
 
 	public boolean checkUserInfo() throws SQLException {
 		ResultSet resultSet = connection.prepareStatement(String.format(
-				"SELECT phone, client_pass FROM clients WHERE phone COLLATE utf8mb4_0900_as_cs LIKE '%s' AND client_pass LIKE '%s'",
-				user.getUserName(), user.getPassword())).executeQuery();
+				"SELECT phone, client_pass " +
+				"FROM clients " +
+				"WHERE phone COLLATE utf8mb4_0900_as_cs LIKE '%s' " +
+				"AND client_pass COLLATE utf8mb4_0900_as_cs LIKE '%s'",
+				user.getPhone(), user.getPassword())).executeQuery();
 
 		if (resultSet.next()) {
 			return true;

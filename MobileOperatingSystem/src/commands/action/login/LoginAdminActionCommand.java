@@ -44,8 +44,11 @@ public class LoginAdminActionCommand implements Command {
 
 	public boolean checkAdminInfo() throws SQLException {
 		ResultSet resultSet = connection.prepareStatement(String.format(
-				"SELECT admin_name, admin_pass FROM admins WHERE admin_name COLLATE utf8mb4_0900_as_cs LIKE '%s' AND admin_pass LIKE '%s'",
-				user.getUserName(), user.getPassword())).executeQuery();
+				"SELECT admin_name, admin_pass " +
+				"FROM admins " +
+				"WHERE admin_name COLLATE utf8mb4_0900_as_cs LIKE '%s' " +
+				"AND admin_pass COLLATE utf8mb4_0900_as_cs LIKE '%s'",
+				user.getPhone(), user.getPassword())).executeQuery();
 
 		if (resultSet.next()) {
 			return true;
