@@ -6,7 +6,7 @@ import java.io.PrintStream;
 import java.sql.Connection;
 
 import commands.Command;
-import commands.input.getUserInfo.GetPhoneNumberInputCommand;
+import commands.input.getClientInformation.GetPhoneNumberInputCommand;
 import exceptions.InputOptionException;
 
 public class SearchClientByPhone implements Command {

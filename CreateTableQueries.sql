@@ -43,6 +43,5 @@ payment_date INT NOT NULL,
 minutes DOUBLE NOT NULL,
 megabytes DOUBLE NOT NULL,
 sms INT NOT NULL,
-bill DOUBLE NOT NULL,
-ad INT NOT NULL
+bill DOUBLE NOT NULL
 );

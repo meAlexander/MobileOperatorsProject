@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import commands.Command;
 
 public class ViewAvailableServices implements Command {
-	private Connection connection;
-	private PrintStream printOut;
+	private static Connection connection;
+	private static PrintStream printOut;
 	private Command nextCommand;
 
 	public ViewAvailableServices(Connection connection, PrintStream printOut, Command nextCommand) {
-		this.connection = connection;
-		this.printOut = printOut;
+		ViewAvailableServices.connection = connection;
+		ViewAvailableServices.printOut = printOut;
 		this.nextCommand = nextCommand;
 	}
 
@@ -28,16 +28,17 @@ public class ViewAvailableServices implements Command {
 		return nextCommand;
 	}
 	
-	private void getAvailableServices() throws SQLException {
+	public static void getAvailableServices() throws SQLException {
 		ResultSet resultSet = connection.prepareStatement(
-				"SELECT operator_name, minutes, megabytes, sms, bill " +
+				"SELECT c.id, operator_name, minutes, megabytes, sms, bill " +
 				"FROM contracts c " +
 				"JOIN operators o ON " +
 				"c.operator_id = o.id" )
 				.executeQuery();
 		
 		while (resultSet.next()) {
-			String availableService = String.format("Operator: %s, Minutes: %.2f, Megabytes: %.2f, SMS: %d, Bill: %.2f",
+			String availableService = String.format("ID: %d, Operator: %s, Minutes: %.2f, Megabytes: %.2f, SMS: %d, Bill: %.2f",
+					resultSet.getInt("id"),
 					resultSet.getString("operator_name"),
 					resultSet.getDouble("minutes"),
 					resultSet.getDouble("megabytes"),

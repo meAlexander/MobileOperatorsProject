@@ -26,7 +26,7 @@ public class LoggedInAdminMenuCommand implements Command {
 			printOut.println("Login admin menu:\n"
 					+ "1.Add services to client\n"
 					+ "2.Add new client\n"
-					+ "3.Search client by phone number\n"
+					+ "3.Search client\n"
 					+ "4.View clients who have not paid yet\n"
 					+ "5.Main menu");
 			printOut.println("Your input please: ");
@@ -52,7 +52,7 @@ public class LoggedInAdminMenuCommand implements Command {
 			return new AddServicesToClient(connection, printOut, buffReader);
 		case "Add new client":
 		case "2":
-			return new AddNewClient(connection, printOut, buffReader);
+			return new AddNewClient(connection, printOut, buffReader, nextCommand);
 		case "Search client by phone number":
 		case "3":
 			return new SearchClientByPhone(connection, printOut, buffReader, nextCommand);
